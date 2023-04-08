@@ -3,7 +3,8 @@
     "type": "library",
     "description": "Spackle is the easiest way to integrate your PHP app with Stripe Billing. See https://www.spackle.so for details.",
     "require": {
-        "aws/aws-sdk-php": "^3.263"
+        "aws/aws-sdk-php": "^3.263",
+        "stripe/stripe-php": "^10.12"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0"
