@@ -33,7 +33,7 @@ class AWSCredentialsProvider
                     'credentials' => $credentials,
                 ));
             } else {
-                $credentials = $data;
+                $credentials = $data['credentials'];
             }
             yield new Credentials(
                 $credentials['AccessKeyId'],
@@ -74,12 +74,13 @@ class AWSCredentialsProvider
             $data = file_get_contents($path);
             if ($data) {
                 $data = json_decode($data, true);
-                $expiration = new DateTimeResult($data['credentials']['Expiration']);
-                $now = new DateTimeResult();
-                if ($expiration < $now) {
-                    return null;
+                if ($data['credentials']) {
+                    $expiration = new DateTimeResult($data['credentials']['Expiration']);
+                    $now = new DateTimeResult();
+                    if ($expiration > $now) {
+                        return $data;
+                    }
                 }
-                return $data;
             }
         }
     }
