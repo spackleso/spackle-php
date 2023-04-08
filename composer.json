@@ -1,0 +1,22 @@
+{
+    "name": "spackleso/spackle-php",
+    "type": "library",
+    "require": {
+        "aws/aws-sdk-php": "^3.263"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Spackle\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hunter Clarke",
+            "email": "hunter@spackle.so"
+        }
+    ]
+}
