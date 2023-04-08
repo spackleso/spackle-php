@@ -15,6 +15,7 @@ class Spackle
 {
     public static $apiKey;
     public static $store;
+    public static $disableSSL = false;
 
     public static $apiBase = 'https://api.spackle.so/v1';
     public static $schemaVersion = 1;
@@ -25,6 +26,10 @@ class Spackle
 
     public static function setStore($store) {
         self::$store = $store;
+    }
+
+    public static function setDisableSSL($disableSSL) {
+        self::$disableSSL = $disableSSL;
     }
 
     public static function getStore() {
@@ -95,7 +100,7 @@ class DynamoDBStore extends Store
             'version'     => 'latest',
             'credentials' => CredentialProvider::memoize($this->credentials),
             'region'      => $this->credentials->getAdapter()->region,
-            'scheme'      => 'http'
+            'scheme'      => Spackle::$disableSSL ? 'http' : 'https',
         ));
     }
 
