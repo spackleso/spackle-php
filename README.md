@@ -27,6 +27,14 @@ In order to use Spackle, you need to configure your API key on the `Spackle` sin
 \Spackle\Spackle::setApiKey('<api key>');
 ```
 
+### Optional: Optimize performance
+
+Spackle's PHP library connects to the Spackle data stores via SSL by default. While more secure, this does come with a performance penalty. If the default latency is not acceptable for your application, you can configure the library to not use SSL. This can cut latency in half.
+
+```php
+\Spackle\Spackle::setSSLEnabled(false):
+```
+
 ## Usage
 
 ### Fetch a customer
@@ -34,19 +42,19 @@ In order to use Spackle, you need to configure your API key on the `Spackle` sin
 Spackle uses stripe ids as references to customer features.
 
 ```php
-$customer = \Spackle\Customer::retrieve("cus_000000000")
+$customer = \Spackle\Customer::retrieve("cus_000000000");
 ```
 
 ### Verify feature access
 
 ```php
-$customer->enabled("feature_key")
+$customer->enabled("feature_key");
 ```
 
 ### Fetch a feature limit
 
 ```php
-$customer->limit("feature_key")
+$customer->limit("feature_key");
 ```
 
 ### Examine a customer's subscriptions
@@ -54,7 +62,7 @@ $customer->limit("feature_key")
 A customer's current subscriptions are available on the `subscriptions` method. These are valid `\Stripe\Subscription` objects as defined in the [Stripe PHP library](https://stripe.com/docs/api/subscriptions/object?lang=php).
 
 ```php
-$customer->subscriptions()
+$customer->subscriptions();
 ```
 
 ## Waiters
@@ -63,15 +71,15 @@ There is a brief delay between when an action takes place in Stripe and when it 
 
 1. Wait for a customer to be created
    ```php
-   \Spackle\Waiters::waitForCustomer("cus_00000000")
+   \Spackle\Waiters::waitForCustomer("cus_00000000");
    ```
 2. Wait for a subscription to be created
    ```php
-   \Spackle\Waiters::waitForSubscription("cus_000000000", "sub_00000000")
+   \Spackle\Waiters::waitForSubscription("cus_000000000", "sub_00000000");
    ```
 3. Wait for a subscription to be updated
    ```php
-   \Spackle\Waiters::waitForSubscription("cus_000000000", "sub_00000000", array("status" => "active"))
+   \Spackle\Waiters::waitForSubscription("cus_000000000", "sub_00000000", array("status" => "active"));
    ```
 
 These will block until Spackle is updated with the latest information from Stripe or until a timeout occurs.
@@ -122,27 +130,27 @@ In production, Spackle requires a valid Stripe customer. However, that is not id
 
 ```php
 \Spackle\Spackle::setStore(new \Spackle\Stores\MemoryStore());
-\Spackle\Spackle::getStore()->set_customer_data("cus_000000000", {
-  "features": [
-    {
-      "type": 0,
-      "key": "flag_feature",
-      "value_flag": True,
-    },
-    {
-      "type": 1,
-      "key": "limit_feature",
-      "value_limit": 100,
-    },
-  ],
-  "subscriptions": [
-     {
-       "id": "sub_000000000",
-       "status": "trialing",
-       "quantity": 1,
-     }
-  ]
-})
+\Spackle\Spackle::getStore()->set_customer_data("cus_000000000", array(
+  "features" => array(
+    array(
+      "type" => 0,
+      "key" => "flag_feature",
+      "value_flag" => true
+    ),
+    array(
+      "type" => 1,
+      "key" => "limit_feature",
+      "value_limit" => 100
+    )
+  ),
+  "subscriptions" => array(
+    array(
+      "id" => "sub_000000000",
+      "status" => "trialing",
+      "quantity" => 1
+    )
+  )
+);
 ```
 
 **Note:** The in-memory store is not thread-safe and state will reset on each application restart.
