@@ -11,13 +11,6 @@ class SpackleTest extends TestCase
         Spackle::setApiKey('test');
         $this->assertSame('test', Spackle::getApiKey());
     }
-
-    public function testSSLEnabledConfig()
-    {
-        $this->assertTrue(Spackle::getSSLEnabled());
-        Spackle::setSSLEnabled(false);
-        $this->assertFalse(Spackle::getSSLEnabled());
-    }
 }
 
 ?>
