@@ -27,14 +27,6 @@ In order to use Spackle, you need to configure your API key on the `Spackle` sin
 \Spackle\Spackle::setApiKey('<api key>');
 ```
 
-### Optional: Optimize performance
-
-Spackle's PHP library connects to the Spackle data stores via SSL by default. While more secure, this does come with a performance penalty. If the default latency is not acceptable for your application, you can configure the library to not use SSL. This can cut latency in half.
-
-```php
-\Spackle\Spackle::setSSLEnabled(false):
-```
-
 ## Usage
 
 ### Fetch a customer
@@ -153,4 +145,4 @@ In production, Spackle requires a valid Stripe customer. However, that is not id
 );
 ```
 
-**Note:** The in-memory store is not thread-safe and state will reset on each application restart.
+j**Note:** The in-memory store is not thread-safe and state will reset on each application restart.
