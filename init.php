@@ -4,6 +4,7 @@ require __DIR__ . '/lib/Spackle.php';
 
 # Resources
 require __DIR__ . '/lib/Customer.php';
+require __DIR__ . '/lib/PricingTable.php';
 
 # Stores
 require __DIR__ . '/lib/Stores/EdgeStore.php';
