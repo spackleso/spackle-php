@@ -2,7 +2,7 @@
 
 namespace Spackle;
 
-class PicingTable
+class PricingTable
 {
     public static function retrieve($id)
     {
