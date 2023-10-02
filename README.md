@@ -46,6 +46,8 @@ In order to use Spackle, you need to configure your secret key on the `Spackle` 
   intervals: string[]
   products: {
     id: string
+    name: string
+    description: string
     features: {
       id: string
       name: string
@@ -54,7 +56,6 @@ In order to use Spackle, you need to configure your secret key on the `Spackle` 
       value_flag: boolean
       value_limit: number | null
     }[]
-    name: string
     prices: {
       month?: {
         id: string
